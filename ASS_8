@@ -1,0 +1,18 @@
+def celebrity(mat):
+    n = len(mat)
+    stack = list(range(n))
+    while len(stack) > 1:
+        a = stack.pop()
+        b = stack.pop()
+        if mat[a][b] == 1:
+            stack.append(b) 
+        else:
+            stack.append(a) 
+    if not stack:
+        return -1
+    cand = stack[0]
+    for i in range(n):
+        if i != cand:
+            if mat[cand][i] == 1 or mat[i][cand] == 0:
+                return -1
+    return cand
