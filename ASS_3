@@ -1,0 +1,23 @@
+class Solution:
+    def infixToPostfix(self, s: str) -> str:
+        precedence = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}
+        stack = []
+        output = []
+            if ch.isalnum():  
+                output.append(ch)
+            elif ch == '(':
+                stack.append(ch)
+            elif ch == ')':
+                while stack and stack[-1] != '(':
+                    output.append(stack.pop())
+                stack.pop()
+            else:  
+                while (stack and stack[-1] != '(' and
+                       precedence.get(stack[-1], 0) >= precedence[ch]):
+                    output.append(stack.pop())
+                stack.append(ch)
+
+        while stack:
+            output.append(stack.pop())
+
+        return ''.join(output)
